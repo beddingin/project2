@@ -1,0 +1,80 @@
+#include "teacher.h"
+#include "student.h"
+#include "course.h"
+#include "person.h"
+#include <string>
+#include <vector>
+#include <iostream>
+
+class Test {
+public:
+    void run() {
+        // Initialize five course objects and three person objects using constructors.
+        Course course1(101, "Mathematics", "Intro to Calculus");
+        Course course2(102, "Physics", "Mechanics");
+        Course course3(103, "Computer Science", "Programming Fundamentals");
+        Course course4(104, "History", "World History");
+        Course course5(105, "English", "Literature");
+
+        Person person1(30, "Nani Doe");
+        Person person2(35, "Slow Smith");
+        Person person3(40, "John Johnson");
+
+        // Initialize three student objects and three teacher objects using constructors.
+        Student student1(20, "Alice Johnson", 1001);
+        Student student2(22, "Eve Smith", 1002);
+        Student student3(21, "Michael Brown", 1003);
+
+        Teacher teacher1(45, "Dr. Williams", 50000);
+        Teacher teacher2(50, "Prof. Davis", 60000);
+        Teacher teacher3(55, "Mrs. Miller", 55000);
+
+        // Enter the courses that students are taking and teachers are teaching now.
+        student1.addCourses(course1);
+        student1.addCourses(course2);
+        student2.addCourses(course1);
+        student2.addCourses(course2);//this is so student 2 has a course to display and it different to student 3
+        student3.addCourses(course3);
+
+         teacher1.addCourse(course1);
+         teacher2.addCourse(course2);
+        teacher3.addCourse(course3);
+        // Students add courses and delete courses.
+        Course newCourseToAdd(106, "Chemistry", "Chemical Reactions");//not made
+        student1.addCourses(newCourseToAdd);
+
+        Course courseToDelete(101, "Mathematics", "Intro to Calculus");//already made
+        student2.deleteCourses(courseToDelete);
+
+        // Compare two students' lists of courses are equal to test overloaded operator "==".
+        if (student1 == student2) {
+            std::cout << "Student 1 and Student 2 have the same courses.\n";
+        } else {
+            std::cout << "Student 1 and Student 2 have different courses.\n";
+        }
+
+        // Demonstrate run-time polymorphism through "printName" virtual functions.
+        printPersonName(student1);
+        printPersonName(teacher1);
+
+        // Print out all information about the data structure that you created.
+        student1.printInformation();
+        teacher1.printInformation();
+        student2.printInformation();
+        teacher2.printInformation();
+        student3.printInformation();
+        teacher3.printInformation();
+    }
+
+    void printPersonName(const Person& person) {
+        person.printName();
+    }
+};
+
+int main() {
+    //i tried my best on mac, but online complier forces me to make test class main
+    Test test;
+    test.run();
+
+    return 0;
+}
